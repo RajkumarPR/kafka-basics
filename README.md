@@ -18,7 +18,9 @@ Let's break down the Kafka definition.
 [Kafka Partition](#kafka-partition)     
 <a name="kafka-topic"/>
 
-
+<p align="center">
+  <img src="./images/kafka-achitecture.png?raw=true" alt="Kafka Architecture"/>
+</p>
 ### Kafka Topic
 - A _Topic_ in Kafka is like a table in RDMS which stores similar things.
 - The messages or events are immutable in Kafka's topic.
