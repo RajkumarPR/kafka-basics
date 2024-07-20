@@ -19,7 +19,7 @@ Let's break down the Kafka definition.
 <a name="kafka-topic"/>
 
 <p align="center">
-  <img src="./images/kafka-achitecture.png?raw=true" alt="Kafka Architecture"/>
+  <img src="./images/kafka-architecture.png?raw=true" alt="Kafka Architecture"/>
 </p>
 ### Kafka Topic
 - A _Topic_ in Kafka is like a table in RDMS which stores similar things.
