@@ -1,2 +1,2 @@
-# kafka-basics
-This is meant for leaning the Kafka basics and getting started guide
+# Kafka Basics
+This is meant for learning the Kafka basics and getting started guide
