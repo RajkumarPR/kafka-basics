@@ -18,13 +18,13 @@ Let's break down the Kafka definition.
   <img src="./images/kafka-architecture.png?raw=true" alt="Kafka Architecture"/>
 </p>
 
-[Kafka Topic](#kafka-topic)  
-[Kafka Partition](#kafka-partition)
-[Kafka Broker](#kafka-broker)
-[Kafka Producer](#kafka-producer)
-[Kafka Consumer](#kafka-consumer)
-[Kafka Consumer Group](#kafka-consumer-group)
-[Kafka Offsets](#kafka-offsets)
+- [Kafka Topic](#kafka-topic)
+- [Kafka Partition](#kafka-partition)
+- [Kafka Broker](#kafka-broker)
+- [Kafka Producer](#kafka-producer)
+- [Kafka Consumer](#kafka-consumer)
+- [Kafka Consumer Group](#kafka-consumer-group)
+- [Kafka Offsets](#kafka-offsets)
 
 ### Kafka Topic
 - A _Topic_ in Kafka is like a table in RDMS which stores similar things.
