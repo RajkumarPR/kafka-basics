@@ -41,10 +41,12 @@ Let's break down the Kafka definition.
   - Round robin if neither partition ID nor message key is available in the message means only the value is available
 
 ### Kafka Broker
-A Kafka broker is a machine running a Kafka process, a set of Kafka brokers in a network known as a Kafka cluster. In short -
+A Kafka broker is a machine running a Kafka process, in short -
 - A computer instance or container running a Kafka process.
 - It manages partitions
 - Handle read-write requests
+
+**Kafka Cluster**: a set of Kafka brokers in a network known as a Kafka cluster.
 
 ### Kafka Producer
 
@@ -64,8 +66,92 @@ Download the Kafka from Official [Apache Kafka](https://kafka.apache.org/downloa
 > [!Note]
 > Kafka broker can be started in 2 ways:
 - Zookeeper: Zookeeper manages and stores meta-data information of the Kafka broker/cluster.
-- Kraft: In this mode, Kafka itself manages
+- Kraft: In this mode, Kafka itself manages Kafka brokers/clusters.
 
 ### Using Zookeeper
+To start the zookeeper service, run the following command in terminal
 
+```Bash
+# Start the ZooKeeper service
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+Once the zookeeper service starts successfully then, run the following command in the terminal to start the Kafka service/broker
+```Bash
+# Start the Kafka broker service
+$ bin/kafka-server-start.sh config/server.properties
+```
+> [!Note]
+> Kafka broker runs on the port 9092 by default. Look for this log message
+```
+ Registered broker 0 at path /brokers/ids/0 with addresses: PLAINTEXT://localhost:9092
+```
+### Using Kraft
+Kafka can be run using KRaft mode using local scripts and downloaded files.
+There are 3 steps
+```Bash
+# 1. Generate a cluster UUID 
+$ KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
 
+# 2. Format Log Directories
+$ bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties
+
+#3. Start the Kafka Server
+$ bin/kafka-server-start.sh config/kraft/server.properties
+```
+> [!Note]
+> Make sure to stop the zookeeper and Kafka service that you started previously using zookeeper 
+
+### Create a topic and send a message
+Let's create a kafka topic called **sports-news** which stores all the news related to sports.
+```bash
+# In another terminal
+
+# Create a topic
+$ bin/kafka-topics.sh --create --topic sports-news --bootstrap-server localhost:9092
+
+# Optionally, run the kafka-topics.sh command to display the topic's usage information.
+$ bin/kafka-topics.sh --describe --topic sports-news --bootstrap-server localhost:9092
+
+# Output will be:
+Topic: sports-news	TopicId: hsXYFr4IQzOrLkmL2cRVFQ	PartitionCount: 1	ReplicationFactor: 1	Configs:
+	Topic: sports-news	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
+```
+
+### Write some sports events into the topic
+Run the console producer client to write a few events into your topic. By default, each line you enter will result in a separate event being written to the topic.
+```bash
+$ bin/kafka-console-producer.sh --topic sports-news --bootstrap-server localhost:9092
+>India into the cricket world cup final
+>India won the cricket world cup 2024
+>Roger Federer won the singles Australian open
+
+```
+
+### Consume a Message
+Open another terminal session and run the console consumer client to read the events you just created
+```bash
+$ bin/kafka-console-consumer.sh --topic sports-news --from-beginning --bootstrap-server localhost:9092
+India into the cricket world cup final 
+India won the cricket world cup 2024
+Roger federer won the singles australian open
+
+# The above messages are being read from the topic.
+# Where:  --from-beginning  flag tells the consumer to read all the messages from the beginning
+```
+
+## Kafka PubSub example
+Let's make our hands dirty and try to demonstrate Kafka's Producer and consumer example.
+Create a spring-boot web application using [spring initializer](https://start.spring.io/) and make sure to add Kafka dependency.
+```coffeescript
+<dependency>
+  <groupId>org.springframework.kafka</groupId>
+  <artifactId>spring-kafka</artifactId>
+</dependency>
+
+<!-- By default 'spring-kafka-test' dependency will be added -->
+<dependency>
+  <groupId>org.springframework.kafka</groupId>
+  <artifactId>spring-kafka-test</artifactId>
+  <scope>test</scope>
+</dependency>
+```
