@@ -101,7 +101,7 @@ $ bin/kafka-server-start.sh config/kraft/server.properties
 > [!Note]
 > Make sure to stop the zookeeper and Kafka service that you started previously using zookeeper 
 
-### Create a topic and send a message
+### Create a topic
 Let's create a kafka topic called **sports-news** which stores all the news related to sports.
 ```bash
 # In another terminal
@@ -124,7 +124,6 @@ $ bin/kafka-console-producer.sh --topic sports-news --bootstrap-server localhost
 >India into the cricket world cup final
 >India won the cricket world cup 2024
 >Roger Federer won the singles Australian open
-
 ```
 
 ### Consume a Message
