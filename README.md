@@ -62,8 +62,8 @@ Download the Kafka from Official [Apache Kafka](https://kafka.apache.org/downloa
   $ cd kafka_2.13-3.7.1
   ```
 > [!Note]
-> Kafka broker can be started in 2 ways
-- Zookeeper: Zookeeper is used to manage and store meta-data information of the Kafka broker/cluster.
+> Kafka broker can be started in 2 ways:
+- Zookeeper: Zookeeper manages and stores meta-data information of the Kafka broker/cluster.
 - Kraft: In this mode, Kafka itself manages
 
 ### Using Zookeeper
