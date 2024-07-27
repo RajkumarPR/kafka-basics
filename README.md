@@ -13,7 +13,7 @@ Let's break down the Kafka definition.
 > [!NOTE]
 > Kafka was originally developed by [LinkedIn](https://www.linkedin.com/) and made open source in 2011.
 
-### Kafka Architecture
+## Kafka Architecture
 <p align="center">
   <img src="./images/kafka-architecture.png?raw=true" alt="Kafka Architecture"/>
 </p>
@@ -55,6 +55,17 @@ A Kafka broker is a machine running a Kafka process, a set of Kafka brokers in a
 ### Kafka Offsets
 
 
+## Kafka Local Setup
+Download the Kafka from Official [Apache Kafka](https://kafka.apache.org/downloads)
+  ```
+  $ tar -xzf kafka_2.13-3.7.1.tgz
+  $ cd kafka_2.13-3.7.1
+  ```
+[!Note]
+> Kafka broker can be started in 2 ways
+- Zookeeper: Zookeeper is used to manage and store meta-data information of the Kafka broker/cluster.
+- Kraft: In this mode, Kafka itself manages
 
+### Using Zookeeper
 
 
