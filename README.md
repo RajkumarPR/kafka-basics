@@ -121,26 +121,29 @@ Topic: sports-news	TopicId: hsXYFr4IQzOrLkmL2cRVFQ	PartitionCount: 1	Replication
 Run the console producer client to write a few events into your topic. By default, each line you enter will result in a separate event being written to the topic.
 ```bash
 $ bin/kafka-console-producer.sh --topic sports-news --bootstrap-server localhost:9092
->India into the cricket world cup final
->India won the cricket world cup 2024
->Roger Federer won the singles Australian open
+>India into the Cricket World Cup final
+>India won the Cricket World Cup 2024
+>Roger Federer won the singles Australian Open
 ```
 
 ### Consume a Message
 Open another terminal session and run the console consumer client to read the events you just created
 ```bash
 $ bin/kafka-console-consumer.sh --topic sports-news --from-beginning --bootstrap-server localhost:9092
-India into the cricket world cup final 
-India won the cricket world cup 2024
-Roger federer won the singles australian open
+India into the cricket World Cup final 
+India won the Cricket World Cup 2024
+Roger Federer won the singles Australian Open
 
 # The above messages are being read from the topic.
 # Where:  --from-beginning  flag tells the consumer to read all the messages from the beginning
 ```
 
-## Kafka PubSub example
-Let's make our hands dirty and try to demonstrate Kafka's Producer and consumer example.
-Create a spring-boot web application using [spring initializer](https://start.spring.io/) and make sure to add Kafka dependency.
+## Kafka Producer/Consumer using spring-boot
+With console Producer/Consumer, we learnt how to create a topic and read/write events from the topic.
+Let's make our hands dirty and try to demonstrate Kafka's producer and consumer example using spring-boot.
+<img width="1042" alt="image" src="https://github.com/user-attachments/assets/c7fa7c0b-68a9-40ef-a78e-07fa3151c6d0">
+
+Create a spring-boot web application using [spring initializer](https://start.spring.io/) and make sure to add spring-Kafka dependency.
 ```coffeescript
 <dependency>
   <groupId>org.springframework.kafka</groupId>
@@ -154,3 +157,6 @@ Create a spring-boot web application using [spring initializer](https://start.sp
   <scope>test</scope>
 </dependency>
 ```
+Edit the Configuration of the application.yml file to add Kafka broker info like bootstrap-server, topic name etc
+
+
