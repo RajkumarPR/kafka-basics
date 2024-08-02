@@ -203,13 +203,42 @@ public class KafkaMessagePublisher {
         CompletableFuture<SendResult<String, String>> status = kafkaTemplate.send(topicName, message);
         status.whenComplete((result, throwable) -> {
             if (throwable == null) {
-                System.out.println("Sent message ["+message+"] " +
-                        "with offset ["+result.getRecordMetadata().offset()+"]");
+                System.out.println("Sent message [" + message + "] " +
+                        "with offset [" + result.getRecordMetadata().offset() + "]");
             } else {
-                System.out.println("Unable to send message to kafka topic ["+topicName+"] " +
-                        "due to "+throwable.getMessage());
+                System.out.println("Unable to send message to kafka topic [" + topicName + "] " +
+                        "due to " + throwable.getMessage());
             }
         });
+    }
+}
+```
+Sample rest controller were we post some messages
+
+```java
+import com.raj.producer.service.KafkaMessagePublisher;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/producer")
+public class KafkaProducerController {
+
+
+    private final KafkaMessagePublisher kafkaMessagePublisher;
+
+    @PostMapping
+    public ResponseEntity<String> producerMsg(@RequestParam("message") String message) {
+        kafkaMessagePublisher.sendMessage(message);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+}
 ```
 
 
