@@ -160,5 +160,57 @@ Create a spring-boot web application using [spring initializer](https://start.sp
 </dependency>
 ```
 Edit the Configuration of the application.yml file to add Kafka broker info like bootstrap-server, topic name etc
+```yaml
+# we can declare the properties related to this application
+myapp:
+  topic: sports-news
+
+spring:
+  application:
+    name: kafka-producer
+
+  kafka:
+    producer:
+      bootstrap-servers:
+        - localhost:9092 # can specify the multiple broker address
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+```
+Kafka event is key-value, the **key-serializer** and **value-serializer** are used to specify which type of serialization is used for key and value respectively.
+
+**Producer Code**
+The `sendMessage()` takes a message from the client, here we use a simple rest controller to send the message for demonstration purposes. Inside the `sendMessage()` method we invoke the kafkaTemplate's `send()` method to post a message to the kafka topic. The response from the `send()` is a `CompletableFuture` so invoking the `whenComplete()` callback to read the response.
+```java
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
+
+@Service
+@RequiredArgsConstructor
+public class KafkaMessagePublisher {
+
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    @Value("${myapp.topic}")
+    private String topicName;
+
+    public void sendMessage(String message) {
+        CompletableFuture<SendResult<String, String>> status = kafkaTemplate.send(topicName, message);
+        status.whenComplete((result, throwable) -> {
+            if (throwable == null) {
+                System.out.println("Sent message ["+message+"] " +
+                        "with offset ["+result.getRecordMetadata().offset()+"]");
+            } else {
+                System.out.println("Unable to send message to kafka topic ["+topicName+"] " +
+                        "due to "+throwable.getMessage());
+            }
+        });
+```
+
 
 
