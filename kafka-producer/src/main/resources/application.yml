@@ -1,0 +1,17 @@
+# we can declare the properties related to this application
+myapp:
+  topic: sports-news
+
+spring:
+  application:
+    name: kafka-producer
+
+  kafka:
+    producer:
+      bootstrap-servers:
+        - localhost:9092 # can specify the multiple broker address
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      # Kafka event is key-value, the key-serializer and value-serializer is used specify the which type of
+      # serialization is used for key and value respectively.
+
