@@ -176,7 +176,9 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 ```
-Kafka event is key-value, the **key-serializer** and **value-serializer** are used to specify which type of serialization is used for key and value respectively.
+Kafka event is key-value.
+The **key-serializer** and **value-serializer** are used to specify which type of serialization is used for key and value respectively.
+sports-news : Kafka topic name that we created before.
 
 **Producer Code**
 The `sendMessage()` takes a message from the client, here we use a simple rest controller to send the message for demonstration purposes. Inside the `sendMessage()` method we invoke the kafkaTemplate's `send()` method to post a message to the kafka topic. The response from the `send()` is a `CompletableFuture` so invoking the `whenComplete()` callback to read the response.
