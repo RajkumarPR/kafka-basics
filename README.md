@@ -65,11 +65,11 @@ Download the Kafka from Official [Apache Kafka](https://kafka.apache.org/downloa
   ```
 > [!Note]
 > Kafka broker can be started in 2 ways:
-- Zookeeper: Zookeeper manages and stores meta-data information of the Kafka broker/cluster.
-- Kraft: In this mode, Kafka itself manages Kafka brokers/clusters.
+- Using Zookeeper: Zookeeper manages and stores meta-data information of the Kafka broker/cluster.
+- Using Kraft: In this mode, Kafka itself manages Kafka brokers/clusters information.
 
 ### Using Zookeeper
-To start the zookeeper service, run the following command in terminal
+To start the zookeeper service, run the following command in the terminal
 
 ```Bash
 # Start the ZooKeeper service
@@ -141,7 +141,9 @@ Roger Federer won the singles Australian Open
 ## Kafka Producer/Consumer using spring-boot
 With console Producer/Consumer, we learnt how to create a topic and read/write events from the topic.
 Let's make our hands dirty and try to demonstrate Kafka's producer and consumer example using spring-boot.
-<img width="1042" alt="image" src="https://github.com/user-attachments/assets/c7fa7c0b-68a9-40ef-a78e-07fa3151c6d0">
+<div align = "center">
+<img width="720" alt="image" src="https://github.com/user-attachments/assets/c7fa7c0b-68a9-40ef-a78e-07fa3151c6d0">
+</div>
 
 Create a spring-boot web application using [spring initializer](https://start.spring.io/) and make sure to add spring-Kafka dependency.
 ```coffeescript
