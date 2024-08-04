@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: kafka-consumer
+
+  kafka:
+    consumer:
+      bootstrap-servers:
+        - localhost:9092
+      group-id: sp-group-1
+
+
+# we can declare the properties related to this application
+myapp:
+  topic: sports-news
