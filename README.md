@@ -145,6 +145,7 @@ Let's make our hands dirty and try to demonstrate Kafka's producer and consumer 
 <img width="720" alt="image" src="https://github.com/user-attachments/assets/c7fa7c0b-68a9-40ef-a78e-07fa3151c6d0">
 </div>
 
+### Producer App
 Create a spring-boot web application using [spring initializer](https://start.spring.io/) and make sure to add spring-Kafka dependency.
 ```coffeescript
 <dependency>
@@ -242,6 +243,42 @@ public class KafkaProducerController {
     }
 }
 ```
+### Consumer App
+Create a spring-boot web application using [spring initializer](https://start.spring.io/) and make sure to add spring-Kafka dependency.
+
+Configure the application.yml file of the consumer app read the events from the Kafka topic.
+```yaml
+server:
+  port: 8081
+
+spring:
+  application:
+    name: kafka-consumer
+
+  kafka:
+    consumer:
+      bootstrap-servers:
+        - localhost:9092
+      group-id: sp-group-1 # This tells that in which consumer group, the consumer belongs to.
+```
+Sample java code
+```java
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class KafkaConsumer {
 
 
+    @KafkaListener(topics = "sports-news", groupId = "sp-group-1")
+    public void consume(String message) {
+
+       log.info("Message consume : {}",message);
+    }
+}
+```
 
