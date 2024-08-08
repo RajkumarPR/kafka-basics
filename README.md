@@ -43,14 +43,28 @@ Let's break down the Kafka definition.
 ### Kafka Broker
 A Kafka broker is a machine running a Kafka process, in short -
 - A computer instance or container running a Kafka process.
-- It manages partitions
+- It manages partitions,
+- It is responsible for assigning the offset to messages
 - Handle read-write requests
 
 **Kafka Cluster**: a set of Kafka brokers in a network known as a Kafka cluster.
 
 ### Kafka Producer
+- A producer creates a new _messages_ and messages will b produced to a specific topic.
+- Producer balance messages all over the partitions in a topic.
+- Produce can be configure to send message specific topic, mainly using the key. This ensures that all messages produced with a given key will get
+written to the same partition.
 
 ### Kafka Consumer
+- Consumer reads _messages_.
+- The consumer subscribes to one or more topics and reads the messages in the order in which they were produced to each partition
+- The consumer keeps track of which messages it has already consumed by keeping track of the offset of messages.
+- The offset—an integer value that continually increases—is another piece of metadata that Kafka adds to each message as it is produced.
+- Consumer always work in consumer group. The group ensures that each partition is only consumed by one member.
+
+<div align = "center">
+<img width="560" alt="image" src="https://github.com/user-attachments/assets/b23a5453-f6e6-4895-b94a-57df7bbfed0c">
+</div>
 
 ### Kafka Consumer Group
 
