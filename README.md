@@ -8,7 +8,7 @@ Let's break down the Kafka definition.
 - **Open-source**: A software/code that is free to use and for possible modification and redistribution.
 - **Distributed**: Kafka is a distributed system that runs on more than one system, inter-connected by the computer networks.
 - **Event stream**: A continuous flow of events. An 'event' can be anything, for example, a click of a link on a website, a Temperature change etc.
-- **Collect**: Collect data from source, in Kafka it's called **_Producer_**.
+- **Collect**: Collect data from the source and store it based on the storage policy.
 
 > [!NOTE]
 > Kafka was originally developed by [LinkedIn](https://www.linkedin.com/) and made open source in 2011.
